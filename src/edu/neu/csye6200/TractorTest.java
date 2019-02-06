@@ -99,7 +99,7 @@ public class TractorTest {
 
     public static void main(String[] args) {
 
-        TractorTest tractTest = new TractorTest(50,false); // Creating a TractorTest object to ca
+        TractorTest tractTest = new TractorTest(50,true); // Creating a TractorTest object to ca
         tractTest.createTractor();
         tractTest.column();
         tractTest.tractorDisplay();
