@@ -1,6 +1,7 @@
 package edu.neu.csye6200;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -46,7 +47,12 @@ public class TractorTest {
             }
 
             Tractarray.add(new Tractor("Make-" + 100 * value, "Model-" + 200 * value, value * 1000D, fuelType,
-                    value*10.0D, value * 2D));
+                    value*10.0D, value * 2D,value));
+
+            if(Objects.equals(Tractarray.get(i).getMake(), "UNKNOWN")){
+                Tractarray.remove(i);
+                i--;
+            }
         }
 
     }
@@ -97,12 +103,21 @@ public class TractorTest {
         }
     }
 
-    public static void main(String[] args) {
+    private static void run(){
 
         TractorTest tractTest = new TractorTest(50,true); // Creating a TractorTest object to ca
         tractTest.createTractor();
         tractTest.column();
         tractTest.tractorDisplay();
+
+
+    }
+
+
+    public static void main(String[] args) {
+
+        run();
+
 
 
     }

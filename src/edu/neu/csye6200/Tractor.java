@@ -12,6 +12,9 @@ public class Tractor {
     private String fuelType;
     private double capacity;
     private double currentFuelLoad;
+    private String ownerID;
+    private double value;
+    private static int id = 0;
 
 
     /**
@@ -50,20 +53,27 @@ public class Tractor {
         this.fuelType = "UNKNOWN";
         this.capacity = 0.0D;
         this.currentFuelLoad = 0.0D;
+        setOwnerID();
+        this.value = 0.0D;
 
     }
 
+    public String getMake() {
+        return make;
+    }
     // Full fledged constructor
 
-    public Tractor(String make, String model, double power, String fuelType, double capacity, double currentFuelLoad) {
+    public Tractor(String make, String model, double power, String fuelType, double capacity, double currentFuelLoad,double value) {
 
-        if (make != null && model != null && power > 0.0D && fuelType != null && capacity > 0.0D && currentFuelLoad > 0.0D && currentFuelLoad < capacity) {
+        if (make != null && model != null && power > 0.0D && fuelType != null && capacity > 0.0D && currentFuelLoad > 0.0D && currentFuelLoad < capacity && value > 0.0D) {
             this.make = make;
             this.model = model;
             this.power = power;
             this.fuelType = fuelType;
             this.capacity = capacity;
             this.currentFuelLoad = currentFuelLoad;
+            setOwnerID();
+            this.value = value;
 
         } else {
             this.make = "UNKNOWN";
@@ -72,8 +82,36 @@ public class Tractor {
             this.fuelType = "UNKNOWN";
             this.capacity = 0.0D;
             this.currentFuelLoad = 0.0D;
+            setOwnerID();
+            this.value = 0.0D;
 
         }
+    }
+
+    /**
+     * Setting the  the OwnerID uniquely
+     */
+
+    public void setOwnerID() {
+
+        this.ownerID = "Owner-ID:"+id;
+        id++;
+    }
+
+    /**
+     * @return the OwnerID
+     */
+
+    public String getOwnerID() {
+        return ownerID;
+    }
+
+    /**
+     * @return the Value
+     */
+
+    public double getValue() {
+        return value;
     }
 
     // Method to calculate range based on fuel efficiency and load
@@ -95,9 +133,10 @@ public class Tractor {
     // String formatting based on the object inputs from test class
     public String toString() {
 
-        return String.format("%10s	%10s %10.2f  %10s %10.2f    %10.2f", make, model, power, fuelType, capacity,currentFuelLoad);
+        return String.format("%10s	%10s %10.2f  %10s %10.2f    %10.2f  %20s %10.2f", make, model, power, fuelType, capacity,currentFuelLoad,ownerID,value);
 
     }
+
 
 }
 
