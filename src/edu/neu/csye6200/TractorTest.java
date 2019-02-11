@@ -10,25 +10,33 @@ import java.util.Random;
 
 public class TractorTest {
 
-    private int maxNumberOfTractor;// Max Rang can be set to 50 for proper formatting of the display
-    private boolean displayWithRange; // To display range with tractor object
-
     private static Random random = new Random(); // creating random object
     private static int value; // Declaring variable to generate random numbers
-    private static ArrayList<Tractor> Tractarray = new ArrayList<>(); // Storing the tractor object in array list for easy access of the stored object
+    private ArrayList<Tractor> Tractarray; // Storing the tractor object in array list for easy access of the stored object
 
 
-    private TractorTest(int maxNumberOfTractor,boolean displayWithRange) {
-        // TODO Auto-generated constructor stub
-        this.maxNumberOfTractor = maxNumberOfTractor;
-        this.displayWithRange = displayWithRange;
+
+
+    // Constructor to store Tractor object in Array list
+
+    public  TractorTest(int maxNumberOfTractor){
+
+        if (maxNumberOfTractor > 0) {
+
+            setTractarray(maxNumberOfTractor);
+        }
+        else {
+            System.out.println("Max Tractor is either zero or less than zero");
+        }
+
     }
 
+    // Setting Array list to store the Tractor objects .
 
-    private void createTractor(){
-
+    private void setTractarray(int maxNumberOfTractor) {
 
         String fuelType; // Storing the fuel type locally to generate random fuel type while creating a object
+        ArrayList<Tractor> tractarray = new ArrayList<>();
 
         // creating max number of Tractor object
         for (int i = 0; i < maxNumberOfTractor; i++) {
@@ -46,69 +54,56 @@ public class TractorTest {
                 fuelType = "Petrol";
             }
 
-            Tractarray.add(new Tractor("Make-" + 100 * value, "Model-" + 200 * value, value * 1000D, fuelType,
-                    value*10.0D, value * 2D,value));
+            tractarray.add(new Tractor("Make-" + 100 * value, "Model-" + 200 * value, value * 1000D, fuelType,
+                    value*10.0D, value * 2D,value*10000));
 
-            if(Objects.equals(Tractarray.get(i).getMake(), "UNKNOWN")){
-                Tractarray.remove(i);
+            if(Objects.equals(tractarray.get(i).getMake(), "UNKNOWN")){
+              tractarray.remove(i);
                 i--;
             }
         }
+        this.Tractarray=tractarray;
+
 
     }
 
-    // Display function only for range
-    private void rangeDisplay(Tractor name, double fuelEfficiency) {
+    // get the array list from this class
 
-
-        name.rangeBasedFuelLoadAndEfficiency(name.getCurrentFuelLoad(), fuelEfficiency, name.getCapacity());
-
+    public ArrayList<Tractor> getTractarray() {
+        return Tractarray;
     }
 
-    // Printing Column Method
-    private void column () {
+    // Display tractor object and the range
+    private void rangeDisplay(ArrayList<Tractor> tractarray) {
 
-        // Printing Column if range field is enabled
-        if (displayWithRange) {
+        System.out.printf("%10s	%10s %10s %10s %10s %10s %10s   %10s", "MAKE", "MODEL", "POWER(KW/HP)", "FUEL-TYPE",
+                "CAPACITY(L/KW)","CURRENT-FUEL(L/KW)","OWNER_ID","VALUE ($)");
 
-
-        System.out.printf("%10s	%10s %10s %10s %10s %10s  %10s %10s   %10s  %10s", "MAKE", "MODEL", "POWER(KW/HP)", "FUEL-TYPE",
-                "CAPACITY(L/KW)","CURRENT-FUEL(L/KW)", "MIN-RANGE(Km)", "CURRENT-RANGE(Km)", "MAX-RANGE(Km)", "FUEL_EFFICIENCY(Km/L Km/KW)");
-        }
-        else {
-            System.out.printf("%10s	%10s %10s %10s %10s %10s", "MAKE", "MODEL", "POWER", "FUEL-TYPE",
-                    "CAPACITY","CURRENT-FUEL(L/KW)");
-        }
+        System.out.printf(" %20s   %10s       %10s  %10s","MIN-RANGE(Km)", "CURRENT-RANGE(Km)", "MAX-RANGE(Km)", "FUEL_EFFICIENCY(Km/L Km/KW)");
 
         System.out.println();
         System.out.println();
-    }
+        try {
+            for (Tractor tractor : tractarray) {
 
-
-    // Printing Tractor display
-    private void tractorDisplay () {
-
-        // Displaying the Tractor object
-        for (int i = 0; i < maxNumberOfTractor; i++) {
-
-            value = random.nextInt(10);
-            System.out.print(Tractarray.get(i));
-
-            // if range field is enabled - call display range as well
-            if(displayWithRange) {
-
-                rangeDisplay(Tractarray.get(i), value + 1.0D);
+                value = random.nextInt(10);// inserting random value to for fuel efficiency for range display
+                System.out.print(tractor);
+                tractor.rangeBasedFuelLoadAndEfficiency(tractor.getCurrentFuelLoad(), value + 1.0D, tractor.getCapacity());
+                System.out.println();
             }
-            System.out.println();
+        }catch (NullPointerException e){
+            System.out.println("EXCEPTION:List is not defined or list size is zero");
         }
+
     }
 
+
+
+    // run  method to display and create the 5 objects
     private static void run(){
 
-        TractorTest tractTest = new TractorTest(50,true); // Creating a TractorTest object to ca
-        tractTest.createTractor();
-        tractTest.column();
-        tractTest.tractorDisplay();
+        TractorTest tractTest = new TractorTest(5); // Creating a TractorTest object of tractor max value 50
+        tractTest.rangeDisplay(tractTest.Tractarray);
 
 
     }
@@ -117,6 +112,7 @@ public class TractorTest {
     public static void main(String[] args) {
 
         run();
+
 
 
 
