@@ -14,7 +14,7 @@ public class TractorTaxation  {
 
     // Constructor to create a TractorTax object
 
-    private TractorTaxation(int maxNumberOfTractor){
+    public TractorTaxation(int maxNumberOfTractor){
 
         setTaxTractarray(maxNumberOfTractor);
         setMyMapTractor();
@@ -99,6 +99,7 @@ public class TractorTaxation  {
             getTractor(index);
             getTaxTractarray().remove(index);
             System.out.println();
+            MapTractor.remove(getTaxTractarray().get(index).getOwnerID()); /// This Code was missing
             System.out.println("Removed successfully");
             System.out.println();
         }

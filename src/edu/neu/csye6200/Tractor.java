@@ -46,6 +46,22 @@ public class Tractor {
         }
     }
 
+    public String getModel() {
+        return model;
+    }
+
+    public double getPower() {
+        return power;
+    }
+
+    public String getFuelType() {
+        return fuelType;
+    }
+
+    public static long getId() {
+        return id;
+    }
+
     /**
      * @return the capacity
      */
@@ -100,6 +116,9 @@ public class Tractor {
 
     }
 
+    public void setOwnerID (String  ownerID){
+        this.ownerID = ownerID;
+    }
 
 
     // Method to calculate range based on fuel efficiency and load

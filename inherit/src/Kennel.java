@@ -24,11 +24,19 @@ public class Kennel {
     }
 
     // List all the pets
-    private void list (){
+   /* private void list (){
         for(PetAnimal pet : petList){
             System.out.println("Pet: "+pet);
         }
-    }
+    }*/
+
+    private void list (){
+        for(PetAnimal pet : petList){
+
+            dog d = (pet)
+        for ()
+            System.out.println("Pet: "+pet);
+        }
 
 
     public static void main(String[] args) {
